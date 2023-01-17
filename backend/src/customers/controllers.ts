@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-import CustomerModel from "./models";
+import { CustomerModel, Customer } from "./models";
 
 /**
  * Finds all customer docs in DB
@@ -20,10 +20,25 @@ const getCustomerById = async (id: mongoose.Types.ObjectId) =>
  * Updates the name of a customer in DB
  * @param id customer id
  * @param name new name
- * @returns promise with updated customer doc or error
+ * @returns promise with original customer doc or error
  */
 const updateName = async (id: mongoose.Types.ObjectId, name: string) =>
   CustomerModel.findOneAndUpdate({ _id: id }, { name: name });
+
+/**
+ * Inserts new customer into DB
+ * @param name customer name
+ * @param age customer age
+ * @param title customer job title
+ * @param company customer job company
+ * @returns promise with new customer doc or error
+ */
+const insertCustomer = async (
+  name: string,
+  age: number,
+  title: string,
+  company: string
+) => CustomerModel.create(new Customer(name, age, title, company));
 
 /**
  * Resets ages of all customers in DB to 0
@@ -43,5 +58,6 @@ export default {
   getCustomers,
   getCustomerById,
   updateName,
+  insertCustomer,
   resetAges,
 };
