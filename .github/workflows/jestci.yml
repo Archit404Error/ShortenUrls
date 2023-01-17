@@ -19,13 +19,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: cd backend
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
+        workdir: ./backend/
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
-      - run: echo 'NODE_ENV = "dev"'' > .env
-      - run: echo 'MONGO_URI = "${{ secrets.MONGO_DEV }}"' >> .env
-      - run: yarn install
-      - run: yarn test
+      - name: Setup dotenv
+        run: |
+          echo 'NODE_ENV = "dev"'' > .env && echo 'MONGO_URI = "${{ secrets.MONGO_DEV }}"' >> .env
+        workdir: ./backend/
+      - name: Install dependencies
+        run: yarn install
+        workdir: ./backend/
+      - name: Run Tests
+        workdir: ./backend/
+        run: yarn test
