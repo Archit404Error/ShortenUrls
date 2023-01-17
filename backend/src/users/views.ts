@@ -1,3 +1,5 @@
+// use Controllers here, just as we did in ../users/controllers.ts
+
 import { Router } from "express";
 
 const userRouter = Router();
