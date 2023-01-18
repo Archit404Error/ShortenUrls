@@ -8,6 +8,8 @@ The backend also comes preconfigured with a jest test suite that will execute on
 
 Start off by copying `.envtemplate` and renaming the copy to `.env`. Configure the node env and mongo dev/prod URI's based on your current environment and secrets.
 
+If you don't have yarn and/or node on your system, run `brew install yarn`. Alternatively, if you already have node you can also run `sudo npm i -g yarn`.
+
 Now, run `yarn install` to install all dependencies. Once that finishes, you're all set to run the backend!
 
 Simply use `yarn dev` to begin running the dev server locally, or `yarn build` to create a production build that can be run using `yarn start`
@@ -34,4 +36,4 @@ If this fails, try running `docker system prune`. The application should begin r
 
 This backend makes use of MongoDB, a NoSQL database that heavily emphasizes data nesting as opposed to data references. An examples of this can be seen in `customers/models.ts` with the Customer and Job classes. To read more about this, check out <a href="https://www.mongodb.com/docs/manual/core/data-modeling-introduction/">this page</a> on the MongoDB website about various schema structures.
 
-Generally speaking, embedding documents yields far speedier responses from MongoDB as opposed to traditional id references as used in SQL databases. Therefore, when creating new models it is important to continue nested data across various collections and documents.
+Generally speaking, embedding documents yields far speedier responses from MongoDB as opposed to traditional id references as used in SQL databases. Therefore, when creating new models it is important to continue using nested data across various collections and documents.
