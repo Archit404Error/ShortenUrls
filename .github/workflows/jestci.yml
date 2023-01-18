@@ -21,17 +21,17 @@ jobs:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
-        workdir: ./backend/
+        working-directory: ./backend/
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
       - name: Setup dotenv
         run: |
           echo 'NODE_ENV = "dev"'' > .env && echo 'MONGO_URI = "${{ secrets.MONGO_DEV }}"' >> .env
-        workdir: ./backend/
+        working-directory: ./backend/
       - name: Install dependencies
         run: yarn install
-        workdir: ./backend/
+        working-directory: ./backend/
       - name: Run Tests
-        workdir: ./backend/
+        working-directory: ./backend/
         run: yarn test
