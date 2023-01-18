@@ -25,6 +25,11 @@ The breakdown of these three types of functions/files is as follows:
 
 Structuring our code in this way decouples the system by introducing modularity. It ensures that we rarely encounter breaking changes and that we have a clean separation of duties for progrmamers. Moreover, it allows us to enforce a predicable design pattern that speeds up onboarding and development on a team.
 
+## Using Docker
+This backend can also be easily dockerized. Once you've created your env file, simply run `docker compose up -d` or `docker compose up` to start up the application (make sure the docker daemon is running).
+
+If this fails, try running `docker system prune`. The application should begin running at port 3000 on your local machine.
+
 ## Database Structure
 
 This backend makes use of MongoDB, a NoSQL database that heavily emphasizes data nesting as opposed to data references. An examples of this can be seen in `customers/models.ts` with the Customer and Job classes. To read more about this, check out <a href="https://www.mongodb.com/docs/manual/core/data-modeling-introduction/">this page</a> on the MongoDB website about various schema structures.
