@@ -28,7 +28,7 @@ jobs:
       - name: Setup Dotenv, Dependencies, and Run Tests
         working-directory: ./backend/
         run: |
-          echo 'NODE_ENV = "dev"' > .env
+          echo 'NODE_ENV = "test"' > .env
           echo 'DEV_URI = "${{ secrets.MONGO_DEV }}"' >> .env
           yarn install
           yarn test
