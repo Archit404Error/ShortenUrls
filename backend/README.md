@@ -23,7 +23,7 @@ The breakdown of these three types of functions/files is as follows:
 - Controllers -- functions that interact with the models to modify specific attributes/pieces of data
 - Views -- routes that the user can interact with which make use of controllers to perform a specific action.
 
-Structuring our code in this way decouples the system by introducing modularity. It ensures that we rarely encounter breaking changes and that we have a clean separation of duties for progrmamers. Moreover, it allows us to enforce a predicable design pattern that speeds up onboarding and development on a team.
+Structuring our code in this way decouples the system by introducing modularity. It ensures that we rarely encounter breaking changes and that we have a clean separation of duties for progrmamers. Moreover, it allows us to enforce a predictable design pattern that speeds up onboarding and development on a team.
 
 ## Using Docker
 This backend can also be easily dockerized. Once you've created your env file, simply run `docker compose up -d` or `docker compose up` to start up the application (make sure the docker daemon is running).
