@@ -29,6 +29,6 @@ jobs:
         working-directory: ./backend/
         run: |
           echo 'NODE_ENV = "dev"' > .env
-          echo 'MONGO_URI = "${{ secrets.MONGO_DEV }}"' >> .env
+          echo 'DEV_URI = "${{ secrets.MONGO_DEV }}"' >> .env
           yarn install
           yarn test
