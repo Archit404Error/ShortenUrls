@@ -9,7 +9,7 @@ on:
     paths: ["backend/**"]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -21,8 +21,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
-        working-directory: ./backend/
         with:
+          working-directory: ./backend/
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
       - name: Setup Dotenv, Dependencies, and Run Tests
