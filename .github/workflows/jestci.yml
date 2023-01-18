@@ -25,13 +25,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
-      - name: Setup dotenv
+      - name: Setup Dotenv, Dependencies, and Run Tests
+        working-directory: ./backend/
         run: |
-          echo 'NODE_ENV = "dev"'' > .env && echo 'MONGO_URI = "${{ secrets.MONGO_DEV }}"' >> .env
-        working-directory: ./backend/
-      - name: Install dependencies
-        run: yarn install
-        working-directory: ./backend/
-      - name: Run Tests
-        working-directory: ./backend/
-        run: yarn test
+          echo 'NODE_ENV = "dev"'' > .env
+          echo 'MONGO_URI = "${{ secrets.MONGO_DEV }}"' >> .env
+          yarn install
+          yarn test
