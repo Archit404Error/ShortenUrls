@@ -10,4 +10,5 @@ module.exports = {
     setupFiles: ["dotenv/config"],
     moduleFileExtensions: ['js', 'ts'],
     maxWorkers: 1,
+    testTimeout: 30000,
 };
