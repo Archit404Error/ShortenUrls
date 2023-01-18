@@ -1,6 +1,6 @@
 # MERN Starter Backend
 
-Welcome to this MERN boilerplate repo's backend. The backend is centered around the MVC (model-view-controller) design pattner, intended to decouple code and reduce potential errors with the system.
+Welcome to this MERN boilerplate repo's backend. The backend is centered around the MVC (model-view-controller) design pattern, intended to decouple code and reduce potential errors with the system.
 
 The backend also comes preconfigured with a jest test suite that will execute on PR creation.
 
