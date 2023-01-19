@@ -2,18 +2,15 @@ import express from "express";
 import bodyParser from "body-parser";
 import userRouter from "./users/views";
 import customerRouter from "./customers/views";
-import expressOasGenerator from "express-oas-generator";
+import swaggerUI from "swagger-ui-express";
+import spec from "../api-spec.json";
 import { dbConnect } from "./database";
 
 const app = express();
-expressOasGenerator.handleResponses(app, {
-  specOutputPath: "swagger.json",
-  specOutputFileBehavior: "merge",
-  swaggerDocumentOptions: undefined,
-});
 
 // Middleware to parse json request bodies
 app.use(bodyParser.json());
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(spec));
 
 /**
  * Sub-routers for our main router, we should have one sub-router per "entity" in the application
@@ -31,8 +28,6 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
   res.send(req.body);
 });
-
-expressOasGenerator.handleRequests();
 
 app.listen(process.env.PORT || 3000, async () => {
   console.log("✅ Server is up and running");
