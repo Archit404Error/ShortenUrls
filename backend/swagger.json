@@ -1,0 +1,179 @@
+{
+  "definitions": {},
+  "info": {
+    "title": "backend",
+    "version": "1.0.0",
+    "license": {
+      "name": "MIT"
+    },
+    "description": "Specification JSONs: [v2](/api-spec/v2), [v3](/api-spec/v3)."
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "/users",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      },
+      "post": {
+        "summary": "/users",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/customers": {
+      "get": {
+        "summary": "/customers",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      },
+      "post": {
+        "summary": "/customers",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/customers/{id}": {
+      "get": {
+        "summary": "/customers/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/customers/updateName/{id}": {
+      "post": {
+        "summary": "/customers/updateName/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "63c6f577241114bcda3dce60"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Archit Mehta"
+                    },
+                    "age": {
+                      "type": "number",
+                      "example": 19
+                    },
+                    "job": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "example": "SWE"
+                        },
+                        "company": {
+                          "type": "string",
+                          "example": "Google"
+                        },
+                        "_id": {
+                          "type": "string",
+                          "example": "63c6f577241114bcda3dce61"
+                        }
+                      }
+                    },
+                    "__v": {
+                      "type": "number",
+                      "example": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/customers/resetAges": {
+      "post": {
+        "summary": "/customers/resetAges",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "/",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      },
+      "post": {
+        "summary": "/",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    }
+  },
+  "swagger": "2.0",
+  "tags": []
+}
