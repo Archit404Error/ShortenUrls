@@ -1,9 +1,29 @@
 import { UserContext } from "@/context/user";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+
+const shortenReq = async (shortUrl: string, origUrl: string) => {
+    const res = await fetch(`${process.env.SERVER}/${shortUrl}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            origUrl: origUrl
+        })
+    })
+
+    const json = await res.json();
+    return json;
+}
 
 const CreateLink = () => {
+    const [shortUrl, setShortUrl] = useState<string>('');
+    const [origUrl, setOrigUrl] = useState<string>('');
+    const [success, setSuccess] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+    const [message, setMessage] = useState<string>('');
     const user = useContext(UserContext);
     const router = useRouter();
     if (!user?.userInfo) {
@@ -29,14 +49,48 @@ const CreateLink = () => {
                     <div className="form-control items-center">
                         <label className="input-group mb-10 justify-center">
                             <span>OG Link</span>
-                            <input type="text" placeholder="https://some-site" className="input input-bordered md:w-80" />
+                            <input
+                                type="text"
+                                placeholder="https://some-site"
+                                className="input input-bordered md:w-80"
+                                onChange={e => setOrigUrl(e.target.value)}
+                            />
                         </label>
                         <label className="input-group mb-10 justify-center">
                             <span>New Link</span>
-                            <input type="text" placeholder="new-link" className="input input-bordered md:w-80" />
+                            <input
+                                type="text"
+                                placeholder="new-link"
+                                className="input input-bordered md:w-80"
+                                onChange={e => setShortUrl(e.target.value)}
+                            />
                         </label>
-                        <button className="btn md:w-80">Create!</button>
+                        <button
+                            className="btn md:w-80"
+                            onClick={async () => {
+                                const res = await shortenReq(shortUrl, origUrl);
+                                if (res.success) {
+                                    setSuccess(true);
+                                    setMessage("Link created successfully!");
+                                } else {
+                                    setError(true);
+                                    setMessage(res.error);
+                                }
+                            }}
+                        >
+                            Create!
+                        </button>
                     </div>
+                    {success &&
+                        <div className="alert alert-success">
+                            <span>{message}</span>
+                        </div>
+                    }
+                    {error &&
+                        <div className="alert alert-error">
+                            <span>{message}</span>
+                        </div>
+                    }
                 </div>
             </main>
         </>

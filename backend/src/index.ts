@@ -16,7 +16,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(spec));
  */
 app.use("/links", linkRouter);
 
-app.listen(process.env.PORT || 3000, async () => {
+app.listen(process.env.PORT || 8080, async () => {
   console.log("✅ Server is up and running");
   await dbConnect();
 });
