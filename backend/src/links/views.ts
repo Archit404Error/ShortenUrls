@@ -31,4 +31,12 @@ linkRouter.post("/:shortUrl", async (req, res) => {
   res.send(successJson(await LinkController.updateLink(shortUrl, origUrl)));
 });
 
+linkRouter.put("/:id", async (req, res) => {
+  const id = new mongoose.Types.ObjectId(req.params.id);
+  const { shortUrl, originalUrl } = req.body;
+  res.send(
+    successJson(await LinkController.updateById(id, shortUrl, originalUrl))
+  );
+});
+
 export default linkRouter;

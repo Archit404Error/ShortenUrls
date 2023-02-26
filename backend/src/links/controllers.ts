@@ -16,6 +16,11 @@ const getLinks = async () => LinkModel.find({});
 const getLinkById = async (id: mongoose.Types.ObjectId) =>
   LinkModel.find({ _id: id });
 
+/**
+ * Finds the original link of a shortUrl
+ * @param shortUrl the shortened url
+ * @returns promise with original link or error
+ */
 const getOrigFromShort = async (shortUrl: string) => {
   const res = await LinkModel.findOne({ shortUrl: shortUrl });
   if (!res) throw new Error("No link found");
@@ -32,6 +37,23 @@ const updateLink = async (shortUrl: string, newUrl: string) =>
   LinkModel.findOneAndUpdate({ shortUrl: shortUrl }, { origUrl: newUrl });
 
 /**
+ * Updates a link by id
+ * @param id link id
+ * @param newShort new short url
+ * @param newOrig new original url
+ * @returns promise with updated link doc or error
+ */
+const updateById = async (
+  id: mongoose.Types.ObjectId,
+  newShort: string,
+  newOrig: string
+) =>
+  LinkModel.updateOne(
+    { _id: id },
+    { shortUrl: newShort, originalUrl: newOrig }
+  );
+
+/**
  * Inserts new link into DB
  * @param shortUrl alias url
  * @param origUrl url pointed to
@@ -45,5 +67,6 @@ export default {
   getLinkById,
   getOrigFromShort,
   updateLink,
+  updateById,
   insertLink,
 };
