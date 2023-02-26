@@ -4,7 +4,9 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 
 const shortenReq = async (shortUrl: string, origUrl: string) => {
-    const res = await fetch(`${process.env.SERVER}`, {
+    console.log(shortUrl)
+    console.log(origUrl)
+    const res = await fetch(`${process.env.SERVER}/links`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -83,12 +85,12 @@ const CreateLink = () => {
                         </button>
                     </div>
                     {success &&
-                        <div className="alert alert-success">
+                        <div className="alert alert-success mt-10">
                             <span>{message}</span>
                         </div>
                     }
                     {error &&
-                        <div className="alert alert-error">
+                        <div className="alert alert-error mt-10">
                             <span>{message}</span>
                         </div>
                     }
