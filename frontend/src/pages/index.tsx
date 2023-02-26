@@ -1,22 +1,17 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import GoogleButton from 'react-google-button'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import firebaseConfig from "../../.firebase.json"
-import { initializeApp } from "firebase/app";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useContext } from 'react'
 import { UserContext, UserContextType } from '@/context/user'
 import { NextRouter, useRouter } from 'next/router'
+import { auth } from '@/firebase/init';
 
 const inter = Inter({ subsets: ['latin'] })
 
-initializeApp(firebaseConfig);
-
 const googleAuth = async (ctx: UserContextType | null, router: NextRouter) => {
 
-  const auth = getAuth();
   const res = await signInWithPopup(auth, new GoogleAuthProvider())
   const credential = GoogleAuthProvider.credentialFromResult(res);
   const idToken = credential?.idToken;

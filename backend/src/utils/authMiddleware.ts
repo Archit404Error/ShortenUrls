@@ -1,18 +1,19 @@
 import { Request, Response, NextFunction } from "express";
-
-interface AuthRequest extends Request {
-  token: string;
-}
+import { getAuth } from "firebase-admin/auth";
 
 export const verifyToken = (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.token;
-  if (token) {
-    next();
-  } else {
+  if (!req.headers.authorization) {
     res.sendStatus(403);
+    return;
   }
+
+  const token = req.headers.authorization.split(" ")[1];
+  getAuth()
+    .verifyIdToken(token)
+    .then((decodedToken) => next())
+    .catch((err) => res.sendStatus(403));
 };

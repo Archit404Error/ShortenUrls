@@ -2,18 +2,18 @@ import { UserContext } from "@/context/user";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
+import { auth } from "@/firebase/init";
 
 const shortenReq = async (shortUrl: string, origUrl: string) => {
-    console.log(shortUrl)
-    console.log(origUrl)
     const res = await fetch(`${process.env.SERVER}/links`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${await auth.currentUser?.getIdToken(true)}`
         },
         body: JSON.stringify({
             origUrl: origUrl,
-            shortUrl: shortUrl
+            shortUrl: shortUrl,
         })
     })
 

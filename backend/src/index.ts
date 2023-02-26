@@ -5,9 +5,13 @@ import linkRouter from "./links/views";
 import swaggerUI from "swagger-ui-express";
 import spec from "../api-spec.json";
 import { dbConnect } from "./database";
+import { initializeApp } from "firebase-admin/app";
+import firebaseConfig from "../.firebase.json";
 
 const app = express();
 app.use(cors());
+
+const firebase = initializeApp(firebaseConfig);
 
 // Middleware to parse json request bodies
 app.use(bodyParser.json());

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { auth } from "@/firebase/init";
 
 interface Link {
     _id: any,
@@ -17,11 +18,12 @@ const LinkCard = ({ shortUrl, originalUrl, _id }: any) => {
         const res = await fetch(`${process.env.SERVER}/links/${_id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${await auth.currentUser?.getIdToken(true)}`,
             },
             body: JSON.stringify({
                 shortUrl: short,
-                originalUrl: orig
+                originalUrl: orig,
             })
         })
 
@@ -36,10 +38,10 @@ const LinkCard = ({ shortUrl, originalUrl, _id }: any) => {
                     <div className="flex-auto">
                         {!edit &&
                             <>
-                                <h1 className="font-serif text-2xl mb-5">
+                                <h1 className="font-serif text-2xl mb-5 break-all">
                                     Alias: {short}
                                 </h1>
-                                <h1 className="font-serif text-2xl">
+                                <h1 className="font-serif text-2xl break-all">
                                     Original: {orig}
                                 </h1>
                             </>
@@ -81,10 +83,16 @@ const EditLinks = () => {
     const router = useRouter();
 
     useEffect(() => {
-        (async () => {
-            const allData = await fetch(`${process.env.SERVER}/links`)
+        auth.onAuthStateChanged(async (user) => {
+            const allData = await fetch(`${process.env.SERVER}/links`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${await user?.getIdToken(true)}`
+                }
+            })
             setLinks(await allData.json())
-        })()
+        });
     }, [])
 
     return (
@@ -102,7 +110,7 @@ const EditLinks = () => {
                 </div>
                 <div className="text-center">
                     <h1 className="text-6xl mt-10 mb-10 font-serif">Edit Existing Links</h1>
-                    <div className="flex justify-center">
+                    <div className="flex flex-col justify-center items-center">
                         {
                             links.map((link, idx) => (
                                 <LinkCard key={`link${idx}`} {...link} />
