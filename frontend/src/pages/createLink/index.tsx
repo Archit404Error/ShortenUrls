@@ -83,6 +83,12 @@ const CreateLink = () => {
                         >
                             Create!
                         </button>
+                        <button
+                            className="btn md:w-80 mt-40"
+                            onClick={() => router.push("/editLinks")}
+                        >
+                            Edit Existing Links Instead
+                        </button>
                     </div>
                     {success &&
                         <div className="alert alert-success mt-10">
