@@ -9,9 +9,15 @@ linkRouter.get("/", async (req, res) => {
   res.send(await LinkController.getLinks());
 });
 
-linkRouter.get("/:id", async (req, res) => {
+linkRouter.get("/getById/:id", async (req, res) => {
   const id = new mongoose.Types.ObjectId(req.params.id);
   res.send(successJson(await LinkController.getLinkById(id)));
+});
+
+linkRouter.get("/:shortUrl", async (req, res) => {
+  LinkController.getOrigFromShort(req.params.shortUrl)
+    .then((origUrl) => res.send(successJson(origUrl)))
+    .catch((err) => res.send(errorJson(err)));
 });
 
 linkRouter.post("/", async (req, res) => {

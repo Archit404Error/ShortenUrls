@@ -32,47 +32,7 @@
     "application/json"
   ],
   "paths": {
-    "/": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/users/": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/customers/": {
+    "/links/": {
       "get": {
         "description": "",
         "parameters": [],
@@ -91,16 +51,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "shortUrl": {
                   "example": "any"
                 },
-                "age": {
-                  "example": "any"
-                },
-                "title": {
-                  "example": "any"
-                },
-                "company": {
+                "origUrl": {
                   "example": "any"
                 }
               }
@@ -114,7 +68,7 @@
         }
       }
     },
-    "/customers/{id}": {
+    "/links/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -132,12 +86,12 @@
         }
       }
     },
-    "/customers/updateName/{id}": {
+    "/links/{shortUrl}": {
       "post": {
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "shortUrl",
             "in": "path",
             "required": true,
             "type": "string"
@@ -148,24 +102,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "origUrl": {
                   "example": "any"
                 }
               }
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/customers/resetAges": {
-      "post": {
-        "description": "",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
