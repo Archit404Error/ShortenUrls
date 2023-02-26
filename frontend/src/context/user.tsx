@@ -20,7 +20,6 @@ export const UserProvider = ({ children }: any) => {
 
   useEffect(() => {
     if (localStorage.hasOwnProperty("userInfo") && localStorage.getItem("userInfo") !== "undefined") {
-      console.log("got " + localStorage.getItem("userInfo"))
       setUserInfo(JSON.parse(localStorage.getItem("userInfo")!))
     }
   }, [])

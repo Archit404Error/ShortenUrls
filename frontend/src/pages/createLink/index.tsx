@@ -4,13 +4,14 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 
 const shortenReq = async (shortUrl: string, origUrl: string) => {
-    const res = await fetch(`${process.env.SERVER}/${shortUrl}`, {
+    const res = await fetch(`${process.env.SERVER}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            origUrl: origUrl
+            origUrl: origUrl,
+            shortUrl: shortUrl
         })
     })
 
