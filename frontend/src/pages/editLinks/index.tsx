@@ -103,7 +103,7 @@ const EditLinks = () => {
             <div className="p-5">
                 <div className="text-sm breadcrumbs">
                     <ul>
-                        <li><a onClick={() => router.push('/')}>Home</a></li>
+                        <li><a onClick={() => router.push('/login')}>Home</a></li>
                         <li><a onClick={() => router.push('/createLink')}>Create</a></li>
                         <li><a>Edit</a></li>
                     </ul>

@@ -41,7 +41,7 @@ const CreateLink = () => {
             <main className="artboard p-10">
                 <div className="text-sm breadcrumbs">
                     <ul>
-                        <li><a onClick={() => router.push('/')}>Home</a></li>
+                        <li><a onClick={() => router.push('/login')}>Home</a></li>
                         <li><a>Create</a></li>
                     </ul>
                 </div>
